@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'git_nav'
+
+repo = File.join(File.dirname(__FILE__), '../..', 'css_pal')
+git_nav = GitNav::GitNavigator.new(repo)
+p git_nav.commits

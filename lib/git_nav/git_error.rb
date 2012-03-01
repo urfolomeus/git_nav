@@ -1,0 +1,3 @@
+class GitError < Exception
+end
+
