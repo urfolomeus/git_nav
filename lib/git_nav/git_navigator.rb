@@ -1,22 +1,25 @@
 module GitNav
   class GitNavigator
+    attr_reader :commits
+
     def initialize(repo=nil)
       repo ||= Dir.pwd
       raise GitError.new("Not a git repo") unless is_git_repo?(repo)
       Dir.chdir repo
+      get_commits
     end
 
-    def commits
+    def get_commits
       reflog = GitWrapper.reflog.split("\n").map! {|entry| entry.split(": ")}
-      commits = reflog.select {|entry| entry[1].scan("commit").count > 0}
-      commits.map!{|commit| [commit.first.split.first, commit.last] }
+      @commits = reflog.select {|entry| entry[1].scan("commit").count > 0}
+      @commits.map!{|commit| [commit.first.split.first, commit.last] }
     end
 
     def current_head
       head = GitNav::GitWrapper.head
-      return commits.first if head.scan("ref:").count > 0
+      return @commits.first if head.scan("ref:").count > 0
       ref = head[0..6]
-      commits.select {|commit| commit.first == ref}.first
+      @commits.select {|commit| commit.first == ref}.first
     end
 
     private
