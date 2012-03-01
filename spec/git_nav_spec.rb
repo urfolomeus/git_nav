@@ -48,8 +48,14 @@ describe GitNav::GitNavigator do
       git_nav.commits.should == expected
     end
 
-    it "gets the current head" do
+    it "gets the current head when the HEAD is attached" do
+      GitNav::GitWrapper.stub(:head).and_return("ref: refs/heads/master")
       git_nav.current_head.should == ["5d6e7f8", "Test commit"]
+    end
+
+    it "gets the current commit when the HEAD is detached" do
+      GitNav::GitWrapper.stub(:head).and_return("1a2b3c47f8abc7de6f5gh3y")
+      git_nav.current_head.should == ["1a2b3c4", "Initial commit"]
     end
   end
 end

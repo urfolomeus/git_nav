@@ -13,7 +13,10 @@ module GitNav
     end
 
     def current_head
-      commits.first
+      head = GitNav::GitWrapper.head
+      return commits.first if head.scan("ref:").count > 0
+      ref = head[0..6]
+      commits.select {|commit| commit.first == ref}.first
     end
 
     private
