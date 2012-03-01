@@ -7,3 +7,5 @@ repo = File.join(File.dirname(__FILE__), '../..', 'css_pal')
 git_nav = GitNav::GitNavigator.new(repo)
 puts "Commits: #{git_nav.commits.inspect}"
 puts "Current commit: #{git_nav.current_head}"
+git_nav.next
+puts "Current commit: #{git_nav.current_head}"

@@ -22,6 +22,13 @@ module GitNav
       @commits.select {|commit| commit.first == ref}.first
     end
 
+    def next
+      current_index = @commits.index(current_head)
+      next_index = current_index - 1
+      next_ref = @commits.fetch(next_index).first
+      GitNav::GitWrapper.checkout(next_ref)
+    end
+
     private
 
     def is_git_repo?(repo)

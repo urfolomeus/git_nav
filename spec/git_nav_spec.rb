@@ -57,6 +57,12 @@ describe GitNav::GitNavigator do
       GitNav::GitWrapper.stub(:head).and_return("1a2b3c47f8abc7de6f5gh3y")
       git_nav.current_head.should == ["1a2b3c4", "Initial commit"]
     end
+
+    it "gets the next commit" do
+      GitNav::GitWrapper.stub(:head).and_return("1a2b3c47f8abc7de6f5gh3y")
+      GitNav::GitWrapper.should_receive(:checkout).with("5d6e7f8")
+      git_nav.next
+    end
   end
 end
 
