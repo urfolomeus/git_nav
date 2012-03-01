@@ -9,3 +9,8 @@ puts "Commits: #{git_nav.commits.inspect}"
 puts "Current commit: #{git_nav.current_head}"
 git_nav.next
 puts "Current commit: #{git_nav.current_head}"
+git_nav.next
+puts "Current commit: #{git_nav.current_head}"
+git_nav.prev
+puts "Current commit: #{git_nav.current_head}"
+
