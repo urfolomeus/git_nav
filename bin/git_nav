@@ -6,11 +6,11 @@ require 'git_nav'
 repo = File.join(File.dirname(__FILE__), '../..', 'css_pal')
 git_nav = GitNav::GitNavigator.new(repo)
 puts "Commits: #{git_nav.commits.inspect}"
-puts "Current commit: #{git_nav.current_head}"
+puts "Current commit:\n#{git_nav.log}"
 git_nav.next
-puts "Current commit: #{git_nav.current_head}"
+puts "Current commit:\n#{git_nav.log}"
 git_nav.next
-puts "Current commit: #{git_nav.current_head}"
+puts "Current commit:\n#{git_nav.log}"
 git_nav.prev
-puts "Current commit: #{git_nav.current_head}"
+puts "Current commit:\n#{git_nav.log}"
 

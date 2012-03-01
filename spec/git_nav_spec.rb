@@ -69,6 +69,10 @@ describe GitNav::GitNavigator do
       GitNav::GitWrapper.should_receive(:checkout).with("HEAD~1")
       git_nav.prev
     end
+
+    it "outputs a nice log" do
+      git_nav.log.should == "* 5d6e7f8 Test commit\n  1a2b3c4 Initial commit"
+    end
   end
 end
 

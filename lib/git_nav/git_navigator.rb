@@ -33,6 +33,13 @@ module GitNav
       GitNav::GitWrapper.checkout("HEAD~1")
     end
 
+    def log
+      @commits.map do |commit|
+        s = commit == current_head ? "* " : "  "
+        s << commit.join(" ")
+      end.join("\n")
+    end
+
     private
 
     def is_git_repo?(repo)
