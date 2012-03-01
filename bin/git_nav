@@ -3,14 +3,18 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'git_nav'
 
-repo = File.join(File.dirname(__FILE__), '../..', 'css_pal')
-git_nav = GitNav::GitNavigator.new(repo)
-puts "Commits: #{git_nav.commits.inspect}"
-puts "Current commit:\n#{git_nav.log}"
-git_nav.next
-puts "Current commit:\n#{git_nav.log}"
-git_nav.next
-puts "Current commit:\n#{git_nav.log}"
-git_nav.prev
-puts "Current commit:\n#{git_nav.log}"
+action = ARGV.shift
+repo_name = ARGV.shift
 
+repo = File.join(File.dirname(__FILE__), '../..', repo_name)
+git_nav = GitNav::GitNavigator.new(repo)
+
+begin
+  git_nav.send(action)
+  puts git_nav.log
+rescue NoMethodError
+  puts "whu?"
+rescue Exception => e
+  p e
+  exit 1
+end
