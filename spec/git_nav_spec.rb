@@ -66,7 +66,7 @@ describe GitNav::GitNavigator do
 
     it "gets the prev commit" do
       GitNav::GitWrapper.stub(:head).and_return("5d6e7f81ah5ys6")
-      GitNav::GitWrapper.should_receive(:checkout).with("1a2b3c4")
+      GitNav::GitWrapper.should_receive(:checkout).with("HEAD~1")
       git_nav.prev
     end
   end
